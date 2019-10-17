@@ -1,0 +1,82 @@
+.header {
+    background-color: #4274ff;
+    color: #fff;
+}
+
+.header h1 {
+    text-align: center;
+    font-size: 55px;
+    line-height: 100px;
+    font-family: 'Anonymous Pro';
+    text-transform: uppercase;
+}
+
+.buttons {
+    min-height: 50px;
+    width: 600px;
+    margin: auto;
+}
+
+.portalButton {
+    border-color: #fff;
+    border-width: 3px;
+    border-style: solid;
+    display: inline-block;
+    height: 40px;
+    width: 150px;
+    margin: 0px 10px 10px 0;
+}
+
+.portalButton button {
+    margin: auto;
+    background-color: transparent;
+    border: none;
+    height: 40px;
+    width: 150px;
+    color: #fff;
+    font-size: 20px;
+}
+
+.trio {
+    margin-left: 60px;
+}
+/*
+.solo {
+    margin-left:  231px;
+    margin-bottom: 10px;
+}
+*/
+
+.duo {
+    margin-left:  150px;
+    margin-bottom: 10px;
+}
+
+.newsChannel {
+    margin: auto;
+    padding-top: 20px;
+    width: 1000px;
+}
+
+.newsBlock {
+    display: inline-block;
+    margin-bottom: 50px;
+    line-height: 20px;
+}
+
+.newsBlock img {
+    width: 20vw;
+    margin: 0 20px 20px 0;
+}
+
+.newsBlock h2 {
+    margin: 10px 0 20px 0;
+    font-size: 25px;
+    line-height: 30px;
+    letter-spacing: .5px;
+}
+
+a {
+    text-decoration: underline;
+    color: blue;
+}

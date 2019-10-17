@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Новостной rss-портал</title>
+    <link rel="stylesheet" href="static/reset.css">
+    <link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+    <div class="header">
+        <h1>Новостной rss-портал</h1>
+        <div class="buttons">
+            <form>
+            <div class="portalButton trio"><button value="blagnews" name="source">blagnews</button></div>
+            <div class="portalButton"><button value="rssboard" name="source">rssboard</button></div>
+            <div class="portalButton"><button value="lenta" name="source">lenta</button></div>
+            <div class="portalButton duo"><button value="mail" name="source">mail</button></div>
+            <div class="portalButton"><button value="technolog" name="source">technolog</button></div>
+            </form>
+        </div>
+    </div>
+    <div class="newsChannel">
+        {{range .NewsBlocks}}
+            <div class="newsBlock">
+                <a href="{{ .Link}}" target="_blank"><h2>{{ .Title}}<br></h2></a>
+                {{if .ImgAvailable}}
+                    <img src="{{ .Image}}" align="left">
+                {{end}}
+                {{ .Description}}
+            </div>
+        {{end}}
+    </div>
+</body>
+</html>
