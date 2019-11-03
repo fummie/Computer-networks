@@ -19,7 +19,7 @@ func main() {
 		panic(err)
 	}
 
-	client, err := ftp.Dial(server + ":21", ftp.DialWithTimeout(5*time.Second))
+	client, err := ftp.Dial(server+":21", ftp.DialWithTimeout(5*time.Second))
 	if err != nil {
 		panic(err)
 	}
@@ -34,7 +34,6 @@ func main() {
 	if _, err := fmt.Scan(&password); err != nil {
 		panic(err)
 	}
-
 
 	if err := client.Login(login, password); err != nil {
 		panic(err)
@@ -55,7 +54,7 @@ loop:
 		line = strings.TrimSuffix(line, "\n")
 		temp := strings.Split(line, " ")
 		command = temp[0]
-		args = temp[1 : ]
+		args = temp[1:]
 
 		if command != "" {
 			switch command {
@@ -98,7 +97,7 @@ func myStor(client *ftp.ServerConn, args []string) {
 	} else {
 		dest = args[0]
 		source = args[1]
-		name = source[strings.LastIndex(source, "/") + 1 : ]
+		name = source[strings.LastIndex(source, "/")+1:]
 		dest = strings.TrimSuffix(dest, "/")
 
 		content, err := ioutil.ReadFile(source)
@@ -108,7 +107,7 @@ func myStor(client *ftp.ServerConn, args []string) {
 
 		reader := bytes.NewReader(content)
 
-		if err := client.Stor(dest + "/" + name, reader); err != nil {
+		if err := client.Stor(dest+"/"+name, reader); err != nil {
 			panic(err)
 		}
 
@@ -123,7 +122,7 @@ func myRetr(client *ftp.ServerConn, args []string) {
 		fmt.Println("Invalid usage of 'retr'\nRun 'help'")
 	} else {
 		dest = args[0]
-		name = dest[strings.LastIndex(dest, "/") : ]
+		name = dest[strings.LastIndex(dest, "/"):]
 
 		resp, err := client.Retr(dest)
 		if err != nil {
