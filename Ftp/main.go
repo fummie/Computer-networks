@@ -8,17 +8,35 @@ import (
 )
 
 func main() {
-	client, err := ftp.Dial("students.yss.su:21", ftp.DialWithTimeout(5*time.Second))
+	var server, login, password string
 
+	fmt.Print("Enter the host url: ")
+	if _, err := fmt.Scanf("%s", &server); err != nil {
+		panic(err)
+	}
+
+	client, err := ftp.Dial(server + ":21", ftp.DialWithTimeout(5*time.Second))
 	if err != nil {
 		panic(err)
 	}
+	fmt.Println("Connected to " + server)
 
-	if err := client.Login("ftpiu8", "3Ru7yOTA"); err != nil {
+	fmt.Print("Enter login: ")
+	if _, err := fmt.Scanf("%s", &login); err != nil {
 		panic(err)
 	}
 
-	fmt.Println("enter the command")
+	fmt.Print("Enter password: ")
+	if _, err := fmt.Scanf("%s", &password); err != nil {
+		panic(err)
+	}
+
+
+	if err := client.Login(login, password); err != nil {
+		panic(err)
+	}
+
+	fmt.Print(login + "@" + server + "$ ")
 
 loop:
 	for {
@@ -85,7 +103,7 @@ func myStor(client *ftp.ServerConn) {
 }
 
 func myRetr(client *ftp.ServerConn) {
-	var inc, dest, name string
+	var inc, dest, name, full string
 	fmt.Println("enter file path")
 	if _, err := fmt.Scanf("%s", &inc); err != nil {
 		panic(err)
@@ -98,7 +116,7 @@ func myRetr(client *ftp.ServerConn) {
 	if _, err := fmt.Scanf("%s", &name); err != nil {
 		panic(err)
 	}
-	full := dest + name
+	full = dest + name
 
 	resp, err := client.Retr(inc)
 	if err != nil {
@@ -127,13 +145,18 @@ func myRetr(client *ftp.ServerConn) {
 }
 
 func myMakeDir(client *ftp.ServerConn) {
-	var path string
+	var path, name, full string
 	fmt.Println("enter the path")
 	if _, err := fmt.Scanf("%s", &path); err != nil {
 		panic(err)
 	}
+	fmt.Println("enter name for the new directory")
+	if _, err := fmt.Scanf("%s", &name); err != nil {
+		panic(err)
+	}
+	full = path + name
 
-	if err := client.MakeDir(path); err != nil {
+	if err := client.MakeDir(full); err != nil {
 		panic(err)
 	}
 
