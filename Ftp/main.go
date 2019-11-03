@@ -22,12 +22,31 @@ loop:
 	for {
 		var command string
 		fmt.Println("enter the command")
-		fmt.Scan(command)
+		if _, err := fmt.Scan(command); err != nil {
+			panic(err)
+		}
 		switch command {
 		case "exit":
 			break loop
 		case "stor":
 			myStor(client)
+		case "retr":
+			myRetr(client)
+		case "makedir":
+			myMakeDir(client)
+		case "delete":
+			myDelete(client)
+		case "list":
+			myList(client)
+		case "help":
+			fmt.Println("the commands are:\n" +
+			"\tstor\tupload a file\n" +
+			"\tretr\tdownload a file\n" +
+			"\tmakedir\tmake a directory\n" +
+			"\tdelete\tdelete a file\n" +
+			"\tlist\tdirectory content")
+		default:
+			fmt.Println(command + ": unknown command\n run 'help' for usage")
 		}
 	}
 
@@ -39,9 +58,13 @@ loop:
 func myStor(client *ftp.ServerConn) {
 	var dest, inc string
 	fmt.Println("enter destination path")
-	fmt.Scan(dest)
+	if _, err := fmt.Scan(dest); err != nil {
+		panic(err)
+	}
 	fmt.Println("enter file path")
-	fmt.Scan(inc)
+	if _, err := fmt.Scan(inc); err != nil {
+		panic(err)
+	}
 
 	file, err := os.Open(inc)
 	if err != nil {
@@ -52,5 +75,98 @@ func myStor(client *ftp.ServerConn) {
 		panic(err)
 	}
 
-	file.Close()
+	if err = file.Close(); err != nil {
+		panic(err)
+	}
+
+	fmt.Println("file stored")
+}
+
+func myRetr(client *ftp.ServerConn) {
+	var inc, dest, name string
+	fmt.Println("enter file path")
+	if _, err := fmt.Scan(inc); err != nil {
+		panic(err)
+	}
+	fmt.Println("enter destination path")
+	if _, err := fmt.Scan(dest); err != nil {
+		panic(err)
+	}
+	fmt.Println("enter name for the new file")
+	if _, err := fmt.Scan(name); err != nil {
+		panic(err)
+	}
+	full := dest + name
+
+	resp, err := client.Retr(inc)
+	if err != nil {
+		panic(err)
+	}
+
+	buf := make([]byte, 0)
+	if _, err = resp.Read(buf); err != nil {
+		panic(err)
+	}
+
+	file, err := os.Create(full)
+	if err != nil {
+		panic(err)
+	}
+
+	if _, err := file.Write(buf); err != nil {
+		panic(err)
+	}
+
+	if err = resp.Close(); err != nil {
+		panic(err)
+	}
+
+	fmt.Println("file downloaded")
+}
+
+
+func myMakeDir(client *ftp.ServerConn) {
+	var path string
+	fmt.Println("enter the path")
+	if _, err := fmt.Scan(path); err != nil {
+		panic(err)
+	}
+
+	if err := client.MakeDir(path); err != nil {
+		panic(err)
+	}
+
+	fmt.Println("directory created")
+}
+
+func myDelete(client *ftp.ServerConn) {
+	var path string
+	fmt.Println("enter file path")
+	if _, err := fmt.Scan(path); err != nil {
+		panic(err)
+	}
+
+	if err := client.Delete(path); err != nil {
+		panic(err)
+	}
+
+	fmt.Println("file deleted")
+}
+
+
+func myList(client *ftp.ServerConn) {
+	var path string
+	fmt.Println("enter the path")
+	if _, err := fmt.Scan(path); err != nil {
+		panic(err)
+	}
+
+	entries, err := client.List(path)
+	if err != nil {
+		panic(err)
+	}
+
+	for _, entry := range entries {
+		fmt.Println("\t" + entry.Name)
+	}
 }
