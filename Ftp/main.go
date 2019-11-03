@@ -18,11 +18,12 @@ func main() {
 		panic(err)
 	}
 
+	fmt.Println("enter the command")
+
 loop:
 	for {
 		var command string
-		fmt.Println("enter the command")
-		if _, err := fmt.Scanf("%s", command); err != nil {
+		if _, err := fmt.Scanf("%s", &command); err != nil {
 			panic(err)
 		}
 		switch command {
@@ -47,7 +48,7 @@ loop:
 				"\tlist\tdirectory content\n" +
 				"\texit\tclose connection")
 		default:
-			fmt.Println(command + ": unknown command\n run 'help' for usage")
+			fmt.Println(command + ": unknown command\nrun 'help' for usage")
 		}
 	}
 
@@ -59,11 +60,11 @@ loop:
 func myStor(client *ftp.ServerConn) {
 	var dest, inc string
 	fmt.Println("enter destination path")
-	if _, err := fmt.Scanf("%s", dest); err != nil {
+	if _, err := fmt.Scanf("%s", &dest); err != nil {
 		panic(err)
 	}
 	fmt.Println("enter file path")
-	if _, err := fmt.Scanf("%s", inc); err != nil {
+	if _, err := fmt.Scanf("%s", &inc); err != nil {
 		panic(err)
 	}
 
@@ -86,15 +87,15 @@ func myStor(client *ftp.ServerConn) {
 func myRetr(client *ftp.ServerConn) {
 	var inc, dest, name string
 	fmt.Println("enter file path")
-	if _, err := fmt.Scanf("%s", inc); err != nil {
+	if _, err := fmt.Scanf("%s", &inc); err != nil {
 		panic(err)
 	}
 	fmt.Println("enter destination path")
-	if _, err := fmt.Scanf("%s", dest); err != nil {
+	if _, err := fmt.Scanf("%s", &dest); err != nil {
 		panic(err)
 	}
 	fmt.Println("enter name for the new file")
-	if _, err := fmt.Scanf("%s", name); err != nil {
+	if _, err := fmt.Scanf("%s", &name); err != nil {
 		panic(err)
 	}
 	full := dest + name
@@ -128,7 +129,7 @@ func myRetr(client *ftp.ServerConn) {
 func myMakeDir(client *ftp.ServerConn) {
 	var path string
 	fmt.Println("enter the path")
-	if _, err := fmt.Scanf("%s", path); err != nil {
+	if _, err := fmt.Scanf("%s", &path); err != nil {
 		panic(err)
 	}
 
@@ -142,7 +143,7 @@ func myMakeDir(client *ftp.ServerConn) {
 func myDelete(client *ftp.ServerConn) {
 	var path string
 	fmt.Println("enter file path")
-	if _, err := fmt.Scanf("%s", path); err != nil {
+	if _, err := fmt.Scanf("%s", &path); err != nil {
 		panic(err)
 	}
 
@@ -156,7 +157,7 @@ func myDelete(client *ftp.ServerConn) {
 func myList(client *ftp.ServerConn) {
 	var path string
 	fmt.Println("enter the path")
-	if _, err := fmt.Scanf("%s", path); err != nil {
+	if _, err := fmt.Scanf("%s", &path); err != nil {
 		panic(err)
 	}
 
