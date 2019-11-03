@@ -194,7 +194,7 @@ func myList(client *ftp.ServerConn, args []string) {
 	var path string
 
 	if len(args) != 1 {
-		fmt.Println("Invalid usage of 'delete'\nRun 'help'")
+		fmt.Println("Invalid usage of 'list'\nRun 'help'")
 	} else {
 		path = args[0]
 		path = strings.TrimSuffix(path, "/")
