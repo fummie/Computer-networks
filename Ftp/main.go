@@ -73,12 +73,12 @@ loop:
 				myList(client, args)
 			case "help":
 				fmt.Println("The commands are:\n" +
-					"\tstor <destination path> <file path>\tUpload a file\n" +
-					"\tretr <file path>\t\t\tDownload a file\n" +
-					"\tmakedir <directory path>\t\tMake a directory\n" +
-					"\tdelete <file path>\t\t\tDelete a file\n" +
-					"\tlist <directory path>\t\t\tDirectory content\n" +
-					"\texit\t\t\t\t\tClose connection")
+					"\tstor <destination path> <file path>\tUpload the file\n" +
+					"\tretr <file path>\t\t\tDownload the file\n" +
+					"\tmakedir <directory path>\t\tMake the directory\n" +
+					"\tdelete <file path>\t\t\tDelete the file\n" +
+					"\tlist <directory path>\t\t\tThe directory content\n" +
+					"\texit\t\t\t\t\tClose the connection")
 			default:
 				fmt.Println(command + ": Unknown command\nRun 'help' for usage")
 			}
