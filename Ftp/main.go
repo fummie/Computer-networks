@@ -44,7 +44,8 @@ loop:
 			"\tretr\tdownload a file\n" +
 			"\tmakedir\tmake a directory\n" +
 			"\tdelete\tdelete a file\n" +
-			"\tlist\tdirectory content")
+			"\tlist\tdirectory content\n" +
+			"\texit\tclose connection")
 		default:
 			fmt.Println(command + ": unknown command\n run 'help' for usage")
 		}
