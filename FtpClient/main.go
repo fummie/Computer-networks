@@ -71,6 +71,8 @@ loop:
 				myRetr(client, args)
 			case "makedir":
 				myMakeDir(client, args)
+			case "removedir":
+				myRemoveDir(client, args)
 			case "delete":
 				myDelete(client, args)
 			case "list":
@@ -80,6 +82,7 @@ loop:
 					"\tstor <destination path> <file path>\tUpload the file\n" +
 					"\tretr <file path>\t\t\tDownload the file\n" +
 					"\tmakedir <directory path>\t\tMake the directory\n" +
+					"\tremovedir <directory path>\t\tRemove the directory\n" +
 					"\tdelete <file path>\t\t\tDelete the file\n" +
 					"\tlist <directory path>\t\t\tThe directory content\n" +
 					"\texit\t\t\t\t\tClose the connection")
@@ -176,6 +179,23 @@ func myMakeDir(client *ftp.ServerConn, args []string) {
 		}
 
 		fmt.Println("Directory created")
+	}
+}
+
+func myRemoveDir(client *ftp.ServerConn, args []string) {
+	var path string
+
+	if len(args) != 1 {
+		fmt.Println("Invalid usage of 'makedir'\nRun 'help'")
+	} else {
+		path = args[0]
+		path = strings.TrimSuffix(path, "/")
+
+		if err := client.RemoveDir(path); err != nil {
+			panic(err)
+		}
+
+		fmt.Println("Directory removed")
 	}
 }
 
