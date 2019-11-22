@@ -12,19 +12,14 @@ import (
 )
 
 func main() {
-	var server, login, password, port string
+	var server, login, password string
 
 	fmt.Print("Enter the host url: ")
 	if _, err := fmt.Scan(&server); err != nil {
 		panic(err)
 	}
 
-	fmt.Print("Enter the port: ")
-	if _, err := fmt.Scan(&port); err != nil {
-		panic(err)
-	}
-
-	client, err := ftp.Dial(server+":"+port, ftp.DialWithTimeout(5*time.Second))
+	client, err := ftp.Dial(server, ftp.DialWithTimeout(5*time.Second))
 	if err != nil {
 		panic(err)
 	}
