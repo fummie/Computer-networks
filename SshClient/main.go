@@ -16,8 +16,8 @@ var (
 	user = flag.String("u", "iu9_31_22", "User name")
 	//pk   = flag.String("pk", defaultKeyPath(), "Private key file")
 	password = flag.String("pass", "Fm4Irnzv", "Password")
-	host = flag.String("h", "lab.posevin.com", "Host")
-	port = flag.Int("p", 22, "Port")
+	host = flag.String("h", "localhost", "Host")
+	port = flag.Int("p", 3000, "Port")
 )
 
 func defaultKeyPath() string {
