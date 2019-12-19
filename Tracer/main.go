@@ -37,7 +37,6 @@ func (f *Fetcher) Close() error {
 var fetch *Fetcher
 
 func fooHandler(w http.ResponseWriter, req *http.Request) {
-	trace.Traces(w, req)
 	tr := trace.New("Trace", "vk.com")
 	defer tr.Finish()
 
@@ -47,13 +46,16 @@ func fooHandler(w http.ResponseWriter, req *http.Request) {
 		panic(err)
 	}
 	//fmt.Println(str)
+
 	tr.LazyPrintf("some event %q happened", str)
+
+	trace.Traces(w, req)
 }
 
 func main()  {
 	defer fetch.Close()
 	http.HandleFunc("/", fooHandler)         // установим роутер
-	err := http.ListenAndServe("localhost:3000", nil) // задаем слушать порт
+	err := http.ListenAndServe("localhost:8080", nil) // задаем слушать порт
 	if err != nil {
 		log.Fatal("ListenAndServe: ", err)
 	}
