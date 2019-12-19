@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>FTP Client</title>
+</head>
+<body>
+<div>
+    <h2>FTP Client</h2>
+    <form method="post" action="stor">
+        Upload the file:
+        <input type="text" name="dest" value="/dest">
+        <input type="text" name="source" value="/source">
+        <input type="submit" value="stor"><br><br>
+    </form>
+    <form method="post" action="retr">
+        Download the file:
+        <input type="text" name="dest" value="/dest">
+        <input type="submit" value="retr"><br><br >
+    </form>
+    <form method="post" action="makedir">
+        Make the directory:
+        <input type="text" name="dest" value="/dest">
+        <input type="submit" value="makedir"><br><br >
+    </form>
+    <form method="post" action="removedir">
+        Remove the directory:
+        <input type="text" name="dest" value="/dest">
+        <input type="submit" value="removedir"><br><br >
+    </form>
+    <form method="post" action="delete">
+        Delete the file:
+        <input type="text" name="dest" value="/dest">
+        <input type="submit" value="delete"><br><br >
+    </form>
+    <form method="post" action="list">
+        The directory content:
+        <input type="text" name="dest" value="/dest">
+        <input type="submit" value="list"><br><br >
+    </form>
+</div>
+</body>
+</html>
