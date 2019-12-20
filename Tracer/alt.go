@@ -36,7 +36,7 @@ func main() {
 	options.SetMaxHops(*m + 1)
 	options.SetFirstHop(*f)
 
-	ipAddr, err := net.ResolveIPAddr("ip", "vk.com")
+	ipAddr, err := net.ResolveIPAddr("ip", host)
 	if err != nil {
 		return
 	}
